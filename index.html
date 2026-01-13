@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive 3D Model Gallery</title>
+    <style>
+        body { 
+            margin: 0; 
+            overflow: hidden; 
+            background: #1a1a1a;
+        }
+        #info {
+            position: absolute;
+            top: 10px;
+            width: 100%;
+            text-align: center;
+            color: rgba(167, 167, 167, 0.733);
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            pointer-events: none;
+        }
+        #loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-family: Arial, sans-serif;
+            font-size: 22px;
+        }
+        #intro-video {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            height: 90%;
+            width: auto;
+
+            z-index: 1000;
+            display: flex;
+
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: transparent; /* 使背景透明 */
+            pointer-events: auto; /* 确保能接收到点击事件 */
+        }
+        
+        #intro-video video {
+            height: 100%;
+            width: auto;
+            display: none; /* Initially hide the video */
+            border-radius: 8px; /* 添加圆角使外观更好看 */
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.7); /* 添加阴影增强悬浮效果 */
+        }
+        
+        #video-controls {
+            position: absolute;
+            bottom: -30px; /* 将控制按钮放在视频下方 */
+            display: flex;
+            gap: 20px;
+            z-index: 1001;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 15px;
+            border-radius: 10px;
+        }
+        
+        .video-btn {
+            padding: 15px 30px;
+            font-size: 18px;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+            border-radius: 30px;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .video-btn:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div id="intro-video">
+        <video id="videoElement" playsinline>
+            <source src="assets/video/intro.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div id="video-controls">
+            <button id="playBtn" class="video-btn">Play Introduction</button>
+            <button id="skipBtn" class="video-btn">Skip</button>
+        </div>
+    </div>
+    
+    <div id="info">Scroll to move along the path | Models loaded: <span id="modelCount">0</span></div>
+    <div id="loading">Loading models...</div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/loaders/GLTFLoader.min.js"></script>
+    <script src="particle_effect.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
